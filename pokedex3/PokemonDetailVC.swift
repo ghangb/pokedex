@@ -30,12 +30,31 @@ class PokemonDetailVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         nameLbl.text = pokemon.name
+        self.pokedexLbl.text = "\(pokemon.pokedexId)"
+        self.mainImg.image = UIImage(named: "\(pokemon.pokedexId)")
+        self.currentEvoImg.image = UIImage(named: "\(pokemon.pokedexId)")
+        
+        pokemon.downloadPokemonDetail {
+           
+            print ("Did arrived here? ")
+            self.updateUI()
+        }
+    }
+    
+    func updateUI() {
+        attackLbl.text = pokemon.attack
+        defenseLbl.text = pokemon.defense
+        heightLbl.text = pokemon.height
+        weightLbl.text = pokemon.weight
+        
     }
 
     @IBAction func backbtnPressed(_ sender: UIButton) {
         
         dismiss(animated: true, completion: nil)
     }
+    
+    
     
 
 }
