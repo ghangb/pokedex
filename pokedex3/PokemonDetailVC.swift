@@ -23,6 +23,7 @@ class PokemonDetailVC: UIViewController {
     @IBOutlet weak var attackLbl: UILabel!
     @IBOutlet weak var currentEvoImg: UIImageView!
     @IBOutlet weak var nextEvoImg: UIImageView!
+    
     @IBOutlet weak var evoLbl: UILabel!
     
     
@@ -46,7 +47,10 @@ class PokemonDetailVC: UIViewController {
         defenseLbl.text = pokemon.defense
         heightLbl.text = pokemon.height
         weightLbl.text = pokemon.weight
-        
+        typeLbl.text = pokemon.type
+        descriptionLbl.text = pokemon.description
+        nextEvoImg.image = UIImage(named: pokemon.nextEvolutionTxt)
+        evoLbl.text = "Next Evoloution: \(pokemon.nextEvolutionName)"
     }
 
     @IBAction func backbtnPressed(_ sender: UIButton) {

@@ -21,7 +21,15 @@ class Pokemon {
     private var _attack: String!
     private var _nextEvolutionTxt: String!
     private var _pokemonURL: String!
+    private var _nextEvolutionName: String!
     
+    
+    var nextEvolutionName: String {
+        if _nextEvolutionName == nil {
+            _nextEvolutionName = ""
+        }
+        return _nextEvolutionName
+    }
     
     var description: String {
         if _description == nil {
@@ -119,16 +127,101 @@ class Pokemon {
                 self._defense = "\(defense)"
             }
             
-//            if let types = dict["types"] as? [Dictionary<String, Any>] {
-//                
-//                
-//            }
-//            
-//            
-//            if let types = dict["types"] as? [Dictionary<String, Any>] {
-//                
-//                
-//            }
+            if let types = dict["types"] as? [Dictionary<String, String>] , types.count > 0 {
+                
+                if let name = types[0]["name"] {
+                    self._type = name.capitalized
+                }
+                
+                if types.count > 1 {
+                    for x in 1..<types.count {
+                        if let name = types[x]["name"] {
+                            
+                            self._type! += "/\(name.capitalized)"
+                        }
+                    }
+                }
+                
+                
+            } else {
+                self._type = " "
+            }
+            
+            print("description çekiliyopr")
+            
+            if let descArr = dict["descriptions"] as? [Dictionary<String, String>] , descArr.count > 0  {
+                
+                 print(descArr)
+                
+                if let url = descArr[0]["resource_uri"] {
+                    Alamofire.request(URL_BASE+url).responseJSON(completionHandler: { (response) in
+                        
+                        
+                        
+                        print(response.result.value)
+                        
+                        
+                        if let descDict = response.result.value as? Dictionary<String, Any> {
+                            
+                            
+                            if let description = descDict["description"] as? String {
+                                
+                                let newDesc = description.replacingOccurrences(of: "POKMON", with: "Pokemon")
+                                
+                                self._description = newDesc
+                                print("description: \(description)")
+                            }
+                            
+                        } else {
+                            self._description = ""
+                        }
+                        completed()
+                })
+                
+            }
+            }
+            
+            //evolution
+            
+            print("evolution çekiliyopr")
+            
+            if let evolutions = dict["evolutions"] as? [Dictionary<String, Any>] , evolutions.count > 0  {
+                
+                print("evolutions \(evolutions)")
+                
+                if let url = evolutions[0]["resource_uri"] {
+                    Alamofire.request("\(URL_BASE)\(url)").responseJSON(completionHandler: { (response) in
+                        
+                        
+                        
+                        print("evolutions dan gelen JSOn \(response.result.value)")
+                        
+                        
+                        if let evolutionsDict = response.result.value as? Dictionary<String, Any> {
+                            
+                            
+                            if let nextEvolutionPokedexId = evolutionsDict["pkdx_id"] as? Int {
+                                
+                                
+                                
+                                self._nextEvolutionTxt = "\(nextEvolutionPokedexId)"
+                                print("nextEvolutionPokedexId: \(nextEvolutionPokedexId)")
+                            }
+                            
+                            if let nextEvolutionName = evolutionsDict["name"] as? String {
+                                self._nextEvolutionName = nextEvolutionName
+                            }
+                            
+                        } else {
+                            self._nextEvolutionTxt = ""
+                        }
+                        completed()
+                    })
+                    
+                }
+            }
+            
+            
             
             print("height: "+self._weight)
             print(self._height)
