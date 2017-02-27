@@ -224,7 +224,7 @@
                                                             <constraint firstAttribute="height" constant="120" id="PsX-u2-f1y"/>
                                                         </constraints>
                                                     </imageView>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="jhhfkgömhjöbn mnvmnvbönvbvömbnövbmnvjöbmbnmvnm öbn ncmvnnöbvnbcnb mnbvmbvcvn mnbn mbm" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="hDc-HG-k1h">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="                                                      " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="hDc-HG-k1h">
                                                         <rect key="frame" x="130" y="0.0" width="158" height="120"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="158" id="m5H-F3-335"/>
